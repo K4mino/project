@@ -5,6 +5,7 @@ body{
 .main{
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .content-item {
@@ -42,3 +43,5 @@ body{
     display: flex;
     justify-content: space-between;
   }
+
+ 

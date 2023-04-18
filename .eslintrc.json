@@ -1,6 +1,7 @@
 {
   "extends": [
     "next",
+    "airbnb-base",
     "eslint:recommended",
     "plugin:react/recommended"],
   "env": {
