@@ -1,8 +1,14 @@
 {
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["./src/*"]
+      }
+    },
+    "exclude": ["node_modules", "build", ".next"],
+    "$schema": "https://json.schemastore.org/jsconfig",
+    "typeAcquisition": {
+      "enable": true
     }
   }
-}
   

@@ -19,8 +19,6 @@ export default function Home() {
       normalizeWheel: true,
     });
     setMyLenis(lenis);
-
-    window.addEventListener('touchend', (e) => handleWheel(e));
   }, []);
 
   const runLenis = () => {
@@ -32,12 +30,31 @@ export default function Home() {
     requestAnimationFrame(raf);
   };
 
-  const handleWheel = (event) => {
+  function handleWheel(event) {
     event.stopPropagation();
     runLenis();
     if (isScrollingTimer !== null) clearTimeout(isScrollingTimer);
     isScrollingTimer = setTimeout(() => {
       const direction = event.deltaY > 0 ? 'down' : 'up';
+
+      const currentIndex = refs.findIndex((ref) => ref.current.classList.contains('active'));
+      if (currentIndex === -1) return;
+
+      const nextIndex = direction === 'down' ? currentIndex + 1 : currentIndex - 1;
+      if (nextIndex < 0 || nextIndex >= refs.length) return;
+
+      refs[currentIndex].current.classList.remove('active');
+      refs[nextIndex].current.classList.add('active');
+      myLenis.scrollTo(refs[nextIndex].current, { duration: 0 });
+    }, 150);
+  }
+
+  const handleTouch = (event) => {
+    event.stopPropagation();
+    runLenis();
+    if (isScrollingTimer !== null) clearTimeout(isScrollingTimer);
+    isScrollingTimer = setTimeout(() => {
+      const direction = event.changedTouches[0].clientY > 0 ? 'down' : 'up';
 
       const currentIndex = refs.findIndex((ref) => ref.current.classList.contains('active'));
       if (currentIndex === -1) return;
@@ -58,7 +75,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="main" onWheel={(e) => handleWheel(e)}>
+      <main className="main" onWheel={(e) => handleWheel(e)}
+      onTouchEndCapture={(e) => handleTouch(e)}>
         <Hero ref={refs[0]}/>
         <Second ref={refs[1]}/>
         <Third ref={refs[2]}/>

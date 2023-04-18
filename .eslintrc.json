@@ -1,6 +1,6 @@
 {
   "extends": [
-    "airbnb-base",
+    "next",
     "eslint:recommended",
     "plugin:react/recommended"],
   "env": {
@@ -8,12 +8,19 @@
   },
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "linebreak-style":[0,"error","windows"]
+    "linebreak-style":[0,"error","windows"],
+    "react/prop-types": "off",
+    "import/extensions": ["error", "ignorePackages", {
+      "js": "never",
+      "jsx": "never",
+      "ts": "never",
+      "tsx": "never",
+      "":"never"
+    }]
   },
-  "settings": {
+  "settings": { 
     "import/resolver": {
       "node": {
-        "paths": ["src"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
