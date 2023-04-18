@@ -51,6 +51,7 @@ export default function Home() {
   }
 
   const handleTouchStart = (event) => {
+    event.stopPropagation();
     setStartY(event.changedTouches[0].clientY);
   }
 
@@ -83,7 +84,8 @@ export default function Home() {
       </Head>
       <main className="main" onWheel={(e) => handleWheel(e)}
       onTouchStart={(e) => handleTouchStart(e)}
-      onTouchEnd={(e) => handleTouchEnd(e)}>
+      onTouchEnd={(e) => handleTouchEnd(e)}
+      onTouchMove={(e) => e.stopPropagation()}>
         <Hero ref={refs[0]}/>
         <Second ref={refs[1]}/>
         <Third ref={refs[2]}/>
