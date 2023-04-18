@@ -1,15 +1,21 @@
 {
-  "extends": "airbnb",
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:react/recommended"],
   "env": {
     "browser": true
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "linebreak-style":[0,"error","windows"]
   },
-  "eslintConfig": {
-    "extends": [
-      "plugin:import/errors",
-      "plugin:import/typescript"
-    ]
-  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
 }
