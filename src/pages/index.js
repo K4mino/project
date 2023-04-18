@@ -9,6 +9,7 @@ import Fourth from '@/components/Fourth';
 export default function Home() {
   const refs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   const [myLenis, setMyLenis] = useState({});
+  const [startY,setStartY] = useState(null);
   let isScrollingTimer = null;
 
   useEffect(() => {
@@ -49,12 +50,17 @@ export default function Home() {
     }, 150);
   }
 
-  const handleTouch = (event) => {
+  const handleTouchStart = (event) => {
+    setStartY(event.changedTouches[0].clientY);
+  }
+
+  const handleTouchEnd = (event) => {
     event.stopPropagation();
     runLenis();
     if (isScrollingTimer !== null) clearTimeout(isScrollingTimer);
     isScrollingTimer = setTimeout(() => {
-      const direction = event.changedTouches[0].clientY > 0 ? 'down' : 'up';
+      const endY = event.changedTouches[0].clientY
+      const direction = endY < startY ? 'down' : 'up';
 
       const currentIndex = refs.findIndex((ref) => ref.current.classList.contains('active'));
       if (currentIndex === -1) return;
@@ -76,7 +82,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="main" onWheel={(e) => handleWheel(e)}
-      onTouchEndCapture={(e) => handleTouch(e)}>
+      onTouchStart={(e) => handleTouchStart(e)}
+      onTouchEnd={(e) => handleTouchEnd(e)}>
         <Hero ref={refs[0]}/>
         <Second ref={refs[1]}/>
         <Third ref={refs[2]}/>
