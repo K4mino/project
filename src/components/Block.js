@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useFirstRender from '../utils/useFirstRender';
 
@@ -13,6 +13,8 @@ const Wrapper = styled.div`
     font-size: 3rem;
     transition: all 0.5s ease-in-out;
     opacity: 0;
+    position:relative;
+    z-index:1;
 
     &.active {
         opacity:1;
@@ -38,7 +40,7 @@ const Block = React.forwardRef(({ title, isActive }, ref) => {
       setIsLoading(false);
       clearTimeout(timer);
     };
-  }, [isActive]);
+  }, [isActive, isFirst]);
 
   return (
     <>

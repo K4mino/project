@@ -28,7 +28,7 @@ const MainPc = ({
       refs[currentIndex].current?.classList.remove('active');
       refs[nextIndex].current?.classList.add('active');
 
-      lenis.scrollTo(refs[nextIndex].current, { duration: 0 });
+      lenis.scrollTo(refs[nextIndex].current, { duration: 0.15 });
     }, 150);
   }
 
