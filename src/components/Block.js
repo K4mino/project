@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useFirstRender from '../utils/useFirstRender';
 
-import Loader from './Loader';
+import LoaderUp from './LoaderUp';
+import LoaderDown from './LoaderDown';
 
 const Wrapper = styled.div`
     height: 100vh;
@@ -15,13 +16,40 @@ const Wrapper = styled.div`
     opacity: 0;
     position:relative;
     z-index:1;
+    background-size:cover;
+
+    background-image: ${({ $background }) => ($background ? `url(${$background})` : 'none')};
+    background-repeat: no-repeat;
 
     &.active {
         opacity:1;
     }
+    &.active h1{
+      color:#fff;
+      background-color:#333;
+      opacity:0;
+      transform: translateX(-150%);
+      animation-name: slideLeft;
+      animation-duration: 2s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+      animation-delay:1s;
+    }
+
+    @keyframes slideLeft {
+      0% {
+        transform: translateX(-150%);
+        opacity:0;
+      }
+      100% {
+        opacity:1;
+        transform: translateX(0%); 
+    }
 `;
 
-const Block = React.forwardRef(({ title, isActive }, ref) => {
+const Block = React.forwardRef(({
+  title, isActive, img, direction,
+}, ref) => {
   const [isLoading, setIsLoading] = useState(false);
   const isFirst = useFirstRender();
   useEffect(() => {
@@ -30,7 +58,7 @@ const Block = React.forwardRef(({ title, isActive }, ref) => {
     if (isActive) {
       setIsLoading(true);
     }
-    // не должно быть loader при первой загрузке
+
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
@@ -41,11 +69,17 @@ const Block = React.forwardRef(({ title, isActive }, ref) => {
       clearTimeout(timer);
     };
   }, [isActive, isFirst]);
-
+  // loaderup loaderdown
+  // slide animation text при active
   return (
     <>
-    {isLoading && <Loader/>}
-    <Wrapper ref={ref}
+    {isLoading
+    && <>
+      {
+        direction === 'up' ? <LoaderUp/> : <LoaderDown/>
+      }
+    </>}
+    <Wrapper ref={ref} $background={img}
         className={isActive ? 'active' : ''}>
         <h1>{title}</h1>
     </Wrapper>

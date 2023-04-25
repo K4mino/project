@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Spin } from 'antd';
 
 const Wrapper = styled.div`
     position:fixed; 
@@ -10,13 +9,14 @@ const Wrapper = styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
-    background-color:#fff;
+    background-color:#333;
+    color:#fff;
 `;
 
-export default function Loader() {
+export default function LoaderUp() {
   return (
         <Wrapper>
-            <Spin size='large'/>
+            <h1>Up</h1>
         </Wrapper>
   );
 }

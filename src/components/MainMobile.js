@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 
@@ -11,6 +11,7 @@ const Wrapper = styled.div`
 const MainMobile = ({
   lenis, refs, isScrollingTimer, runLenis, setActiveElement, activeElement, setStartY, startY,
 }) => {
+  const [direction, setDirection] = useState('down');
   const handleTouchStart = (event) => {
     event.stopPropagation();
     setStartY(event.changedTouches[0].clientY);
@@ -24,21 +25,19 @@ const MainMobile = ({
 
     isScrollingTimer = setTimeout(() => {
       const endY = event.changedTouches[0].clientY;
-      const direction = endY < startY ? 'down' : 'up';
+      const currentDirection = endY < startY ? 'down' : 'up';
+      setDirection(currentDirection);
 
-      const currentIndex = activeElement;
-
-      const nextIndex = direction === 'down' ? currentIndex + 1 : currentIndex - 1;
+      const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
       if (nextIndex < 0 || nextIndex >= refs.length) return;
 
       setActiveElement(nextIndex);
-      refs[currentIndex].current.classList.remove('active');
-      refs[nextIndex].current.classList.add('active');
 
-      lenis.scrollTo(refs[nextIndex].current, { duration: 0 });
+      lenis.scrollTo(refs[nextIndex].ref.current, { duration: 0 });
     }, 150);
   };
-
+  // props top or bottom
+  // constants
   return (
         <Wrapper
         onTouchStart={handleTouchStart}
@@ -47,6 +46,8 @@ const MainMobile = ({
         {
             refs.map((item, i) => (
                 <Block
+                img={item.src}
+                direction={direction}
                 title={item.title}
                 key={item.id}
                 ref={item.ref}

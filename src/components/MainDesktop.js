@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 
@@ -8,9 +8,10 @@ const Wrapper = styled.div`
     position: relative;
 `;
 
-const MainPc = ({
+const MainDesktop = ({
   lenis, refs, isScrollingTimer, runLenis, setActiveElement, activeElement,
 }) => {
+  const [direction, setDirection] = useState('down');
   function handleWheel(event) {
     if (isScrollingTimer !== null) clearTimeout(isScrollingTimer);
 
@@ -18,17 +19,15 @@ const MainPc = ({
     runLenis();
 
     isScrollingTimer = setTimeout(() => {
-      const direction = event.deltaY > 0 ? 'down' : 'up';
-      const currentIndex = activeElement;
+      const currentDirection = event.deltaY > 0 ? 'down' : 'up';
+      setDirection(currentDirection);
 
-      const nextIndex = direction === 'down' ? currentIndex + 1 : currentIndex - 1;
+      const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
       if (nextIndex < 0 || nextIndex >= refs.length) return;
 
       setActiveElement(nextIndex);
-      refs[currentIndex].current?.classList.remove('active');
-      refs[nextIndex].current?.classList.add('active');
 
-      lenis.scrollTo(refs[nextIndex].current, { duration: 0.15 });
+      lenis.scrollTo(refs[nextIndex].ref.current, { duration: 0 });
     }, 150);
   }
 
@@ -37,6 +36,8 @@ const MainPc = ({
         {
             refs.map((item, i) => (
                 <Block
+                img={item.src}
+                direction={direction}
                 title={item.title}
                 key={item.id}
                 ref={item.ref}
@@ -46,4 +47,4 @@ const MainPc = ({
     </Wrapper>);
 };
 
-export default MainPc;
+export default MainDesktop;

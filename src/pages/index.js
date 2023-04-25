@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Lenis from '@studio-freight/lenis';
-import MainPc from '../components/MainPc';
+import MainDesktop from '../components/MainDesktop';
 import MainMobile from '../components/MainMobile';
 
 const ProgressBar = styled.div`
@@ -31,24 +31,28 @@ export default function Home() {
       id: 1,
       ref: useRef(null),
       title: 'First',
+      src: '/images/1.jpg',
     },
     {
       id: 2,
       ref: useRef(null),
       title: 'Second',
+      src: '/images/2.jpg',
     },
     {
       id: 3,
       ref: useRef(null),
       title: 'Third',
+      src: '/images/3.jpg',
     },
     {
       id: 4,
       ref: useRef(null),
       title: 'Fourth',
+      src: '/images/4.jpg',
     },
   ];
-  const [windowSize, setWindowSize] = useState();
+  const [windowWidth, setWindowWidth] = useState(0);
   const [myLenis, setMyLenis] = useState({});
   const [startY, setStartY] = useState(null);
   const [activeElement, setActiveElement] = useState(0);
@@ -74,13 +78,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setWindowSize(window.innerWidth);
-    window.addEventListener('resize', () => {
-      setWindowSize(window.innerWidth);
-    });
-  }, [windowSize]);
+    setWindowWidth(window.innerWidth);
+  }, []);
 
-  // Перенести main, один компонент для блоков
+  // вынести Head
   return (
     <>
       <Head>
@@ -90,9 +91,9 @@ export default function Home() {
       </Head>
       <main className="main">
         {
-          windowSize > 760
+          windowWidth > 960
             ? (
-          <MainPc
+          <MainDesktop
           refs={refs}
           lenis={myLenis}
           runLenis={runLenis}
