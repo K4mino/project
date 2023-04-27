@@ -1,15 +1,15 @@
-import Head from 'next/head';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Lenis from '@studio-freight/lenis';
 import MainDesktop from '../components/MainDesktop';
 import MainMobile from '../components/MainMobile';
+import CustomHead from '../components/CustomHead';
 
 const ProgressBar = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   width: 30px;
   height: auto;
   top: 50%;
@@ -81,14 +81,9 @@ export default function Home() {
     setWindowWidth(window.innerWidth);
   }, []);
 
-  // вынести Head
   return (
     <>
-      <Head>
-        <title>Create Next App</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <CustomHead/>
       <main className="main">
         {
           windowWidth > 960

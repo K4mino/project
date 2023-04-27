@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 
@@ -12,12 +12,15 @@ const MainMobile = ({
   lenis, refs, isScrollingTimer, runLenis, setActiveElement, activeElement, setStartY, startY,
 }) => {
   const [direction, setDirection] = useState('down');
+  const [isLoading, setIsLoading] = useState(false);
   const handleTouchStart = (event) => {
     event.stopPropagation();
     setStartY(event.changedTouches[0].clientY);
   };
 
   const handleTouchEnd = (event) => {
+    if (isLoading) return;
+
     if (isScrollingTimer !== null) clearTimeout(isScrollingTimer);
 
     event.stopPropagation();
@@ -36,16 +39,25 @@ const MainMobile = ({
       lenis.scrollTo(refs[nextIndex].ref.current, { duration: 0 });
     }, 150);
   };
-  // props top or bottom
-  // constants
+
+  useEffect(() => {
+    if (isLoading) {
+      document.removeEventListener('touchEnd', handleTouchEnd);
+    }
+    document.addEventListener('touchEnd', handleTouchEnd);
+  }, [isLoading]);
+
   return (
-        <Wrapper
+      <Wrapper
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTouchMove={(e) => e.stopPropagation()}>
         {
             refs.map((item, i) => (
                 <Block
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
+                isFirst={activeElement === 0}
                 img={item.src}
                 direction={direction}
                 title={item.title}

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import useFirstRender from '../utils/useFirstRender';
 
 import LoaderUp from './LoaderUp';
 import LoaderDown from './LoaderDown';
@@ -12,7 +11,7 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 3rem;
-    transition: all 0.5s ease-in-out;
+    transition: opacity 3s linear;
     opacity: 0;
     position:relative;
     z-index:1;
@@ -48,14 +47,13 @@ const Wrapper = styled.div`
 `;
 
 const Block = React.forwardRef(({
-  title, isActive, img, direction,
+  title, isActive, img, direction, isFirst, isLoading, setIsLoading,
 }, ref) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const isFirst = useFirstRender();
+  // isFirst
   useEffect(() => {
-    if (isFirst) return;
+    const showLoader = !(isFirst && direction === 'down');
 
-    if (isActive) {
+    if (isActive && showLoader) {
       setIsLoading(true);
     }
 
@@ -65,12 +63,10 @@ const Block = React.forwardRef(({
 
     // eslint-disable-next-line consistent-return
     return () => {
-      setIsLoading(false);
       clearTimeout(timer);
     };
-  }, [isActive, isFirst]);
-  // loaderup loaderdown
-  // slide animation text при active
+  }, [isActive]);
+  // скролл при загрузке
   return (
     <>
     {isLoading

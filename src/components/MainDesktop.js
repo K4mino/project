@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 
@@ -12,7 +12,10 @@ const MainDesktop = ({
   lenis, refs, isScrollingTimer, runLenis, setActiveElement, activeElement,
 }) => {
   const [direction, setDirection] = useState('down');
+  const [isLoading, setIsLoading] = useState(false);
   function handleWheel(event) {
+    if (isLoading) return;
+
     if (isScrollingTimer !== null) clearTimeout(isScrollingTimer);
 
     event.stopPropagation();
@@ -27,15 +30,25 @@ const MainDesktop = ({
 
       setActiveElement(nextIndex);
 
-      lenis.scrollTo(refs[nextIndex].ref.current, { duration: 0 });
+      lenis.scrollTo(refs[nextIndex].ref.current, { duration: 0.15 });
     }, 150);
   }
+
+  useEffect(() => {
+    if (isLoading) {
+      document.removeEventListener('wheel', handleWheel);
+    }
+    document.addEventListener('wheel', handleWheel);
+  }, [isLoading]);
 
   return (
     <Wrapper onWheel={handleWheel}>
         {
             refs.map((item, i) => (
                 <Block
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
+                isFirst={activeElement === 0}
                 img={item.src}
                 direction={direction}
                 title={item.title}
