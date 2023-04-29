@@ -29,13 +29,13 @@ const MainMobile = ({
     const endY = event.changedTouches[0].clientY;
     const currentDirection = endY < startY ? 'down' : 'up';
     setDirection(currentDirection);
+    setIsLoading(true);
 
     isScrollingTimer = setTimeout(() => {
       const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
       if (nextIndex < 0 || nextIndex >= refs.length) return;
 
       setActiveElement(nextIndex);
-      setIsLoading(true);
       lenis.scrollTo(refs[nextIndex].ref.current, {
         duration: 1.5,
         onComplete: () => {
