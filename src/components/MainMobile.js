@@ -26,12 +26,11 @@ const MainMobile = ({
 
     event.stopPropagation();
     runLenis();
+    const endY = event.changedTouches[0].clientY;
+    const currentDirection = endY < startY ? 'down' : 'up';
+    setDirection(currentDirection);
 
     isScrollingTimer = setTimeout(() => {
-      const endY = event.changedTouches[0].clientY;
-      const currentDirection = endY < startY ? 'down' : 'up';
-      setDirection(currentDirection);
-
       const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
       if (nextIndex < 0 || nextIndex >= refs.length) return;
 
