@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-
-import LoaderUp from './LoaderUp';
-import LoaderDown from './LoaderDown';
 
 const Wrapper = styled.div`
     height: 100vh;
@@ -47,41 +44,13 @@ const Wrapper = styled.div`
 `;
 
 const Block = React.forwardRef(({
-  title, isActive, img, direction, isFirst, isLoading, setIsLoading,
-}, ref) => {
-  // isFirst
-  useEffect(() => {
-    const showLoader = !(isFirst && direction === 'down');
-
-    if (isActive && showLoader) {
-      setIsLoading(true);
-    }
-
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-
-    // eslint-disable-next-line consistent-return
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isActive]);
-  // скролл при загрузке
-  return (
-    <>
-    {isLoading
-    && <>
-      {
-        direction === 'up' ? <LoaderUp/> : <LoaderDown/>
-      }
-    </>}
+  title, isActive, img,
+}, ref) => (
     <Wrapper ref={ref} $background={img}
         className={isActive ? 'active' : ''}>
         <h1>{title}</h1>
     </Wrapper>
-    </>
-  );
-});
+));
 
 Block.displayName = 'Block';
 
