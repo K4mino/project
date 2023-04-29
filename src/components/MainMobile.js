@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
+import Loader from './Loader';
 
 const Wrapper = styled.div`
     display: flex;
@@ -36,22 +37,25 @@ const MainMobile = ({
 
       setActiveElement(nextIndex);
 
-      lenis.scrollTo(refs[nextIndex].ref.current, { duration: 0 });
+      lenis.scrollTo(refs[nextIndex].ref.current, {
+        duration: 1.5,
+        onComplete: () => {
+          setIsLoading(false);
+        },
+        lock: true,
+      });
     }, 150);
   };
-
-  useEffect(() => {
-    if (isLoading) {
-      document.removeEventListener('touchEnd', handleTouchEnd);
-    }
-    document.addEventListener('touchEnd', handleTouchEnd);
-  }, [isLoading]);
 
   return (
       <Wrapper
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTouchMove={(e) => e.stopPropagation()}>
+        {isLoading && <Loader
+        direction={direction}
+        activeElement={activeElement}
+        isFirst={activeElement === 0}/>}
         {
             refs.map((item, i) => (
                 <Block

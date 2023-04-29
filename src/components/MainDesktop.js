@@ -42,7 +42,7 @@ const MainDesktop = ({
       });
     }, 150);
   }
-  console.log();
+
   return (
     <Wrapper ref={container} onWheel={handleWheel}>
         {isLoading && <Loader
