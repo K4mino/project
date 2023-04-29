@@ -36,7 +36,7 @@ const MainMobile = ({
       if (nextIndex < 0 || nextIndex >= refs.length) return;
 
       setActiveElement(nextIndex);
-
+      setIsLoading(true);
       lenis.scrollTo(refs[nextIndex].ref.current, {
         duration: 1.5,
         onComplete: () => {
