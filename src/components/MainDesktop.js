@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 import Loader from './Loader';
+import Menu from './Menu';
 
 const Wrapper = styled.div`
     display: flex;
@@ -14,7 +15,9 @@ const MainDesktop = ({
 }) => {
   const [direction, setDirection] = useState('down');
   const [isLoading, setIsLoading] = useState(false);
-  const container = useRef(null);
+  const [toggleNav, setToggleNav] = useState(false);
+  const [percentage, setPercentage] = useState(30);
+  const [objFitPercentage, setObjFitPercentage] = useState(0);
 
   function handleWheel(event) {
     if (isLoading) return;
@@ -25,12 +28,23 @@ const MainDesktop = ({
     runLenis();
     const currentDirection = event.deltaY > 0 ? 'down' : 'up';
     setDirection(currentDirection);
+
+    const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
+    if (nextIndex < 0 || nextIndex >= refs.length) return;
+
     setIsLoading(true);
 
-    isScrollingTimer = setTimeout(() => {
-      const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
-      if (nextIndex < 0 || nextIndex >= refs.length) return;
+    if (currentDirection === 'down') {
+      setPercentage((prev) => prev - 20);
+      setObjFitPercentage((prev) => prev + 10);
+    }
 
+    if (currentDirection === 'up') {
+      setPercentage((prev) => prev + 20);
+      setObjFitPercentage((prev) => prev - 10);
+    }
+
+    isScrollingTimer = setTimeout(() => {
       setActiveElement(nextIndex);
       lenis.scrollTo(refs[nextIndex].ref.current, {
         duration: 1.5,
@@ -42,12 +56,17 @@ const MainDesktop = ({
     }, 150);
   }
 
+  const handleToggleNav = () => {
+    setToggleNav(!toggleNav);
+  };
+  console.log(objFitPercentage);
+  // 7 секция desktop,web, mobile, about us,portfolio, pricing, contact,
+  // menu camilemormal
   return (
-    <Wrapper ref={container} onWheel={handleWheel}>
+    <Wrapper onWheel={handleWheel}>
         {isLoading && <Loader
         direction={direction}
-        activeElement={activeElement}
-        isFirst={activeElement === 0}/>}
+        activeElement={activeElement}/>}
         {
             refs.map((item, i) => (
                 <Block
@@ -62,6 +81,13 @@ const MainDesktop = ({
                 isActive={i === activeElement}/>
             ))
         }
+        <Menu onClick={handleToggleNav}
+        refs={refs}
+        activeElement={activeElement}
+        toggleNav={toggleNav}
+        percentage={percentage}
+        objFitPercentage={objFitPercentage}
+        setPercentage={setPercentage}/>
     </Wrapper>);
 };
 

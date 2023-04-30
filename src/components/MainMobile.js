@@ -29,12 +29,13 @@ const MainMobile = ({
     const endY = event.changedTouches[0].clientY;
     const currentDirection = endY < startY ? 'down' : 'up';
     setDirection(currentDirection);
+
+    const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
+    if (nextIndex < 0 || nextIndex >= refs.length) return;
+
     setIsLoading(true);
 
     isScrollingTimer = setTimeout(() => {
-      const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
-      if (nextIndex < 0 || nextIndex >= refs.length) return;
-
       setActiveElement(nextIndex);
       lenis.scrollTo(refs[nextIndex].ref.current, {
         duration: 1.5,
@@ -53,20 +54,15 @@ const MainMobile = ({
         onTouchMove={(e) => e.stopPropagation()}>
         {isLoading && <Loader
         direction={direction}
-        activeElement={activeElement}
-        isFirst={activeElement === 0}/>}
+        activeElement={activeElement}/>}
         {
-            refs.map((item, i) => (
+            refs.map((item) => (
                 <Block
-                setIsLoading={setIsLoading}
-                isLoading={isLoading}
-                isFirst={activeElement === 0}
                 img={item.src}
                 direction={direction}
                 title={item.title}
                 key={item.id}
-                ref={item.ref}
-                isActive={i === activeElement}/>
+                ref={item.ref}/>
             ))
         }
     </Wrapper>);
