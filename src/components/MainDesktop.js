@@ -70,9 +70,6 @@ const MainDesktop = ({
         {
             refs.map((item, i) => (
                 <Block
-                setIsLoading={setIsLoading}
-                isLoading={isLoading}
-                isFirst={activeElement === 0}
                 img={item.src}
                 direction={direction}
                 title={item.title}

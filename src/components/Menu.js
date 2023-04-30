@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     inset:0;
-    transition: all .5s ease;
+   
   }
 `;
 
@@ -22,7 +22,7 @@ const ProgressBar = styled.div`
   gap: 10px;
   z-index: 999;
   cursor: pointer;
-  transition: all .5s ease;
+ 
 
   &.active {
     position: absolute;
@@ -35,7 +35,6 @@ const ProgressBar = styled.div`
 
 const Bar = styled.img`
   height: 100px;  
-  transition: width 0.5s linear;
 
   ${({ $isActive }) => ($isActive ? 'width: 200px;' : 'width: 100px;')}
   ${({ $isActive }) => ($isActive
@@ -44,6 +43,7 @@ const Bar = styled.img`
 
   &.image.active {
     height: 56vmin;
+    transition: width 0.5s linear;
     ${({ $isActive }) => ($isActive ? 'width: 50vmin;' : 'width: 40vmin;')}
   }
   object-fit: cover;

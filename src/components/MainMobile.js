@@ -56,8 +56,9 @@ const MainMobile = ({
         direction={direction}
         activeElement={activeElement}/>}
         {
-            refs.map((item) => (
+            refs.map((item, i) => (
                 <Block
+                isActive={i === activeElement}
                 img={item.src}
                 direction={direction}
                 title={item.title}
