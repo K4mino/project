@@ -48,6 +48,7 @@ const MainMobile = ({
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setActiveElement(0);
   }, []);
 
