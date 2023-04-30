@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 import Loader from './Loader';
@@ -46,6 +46,10 @@ const MainMobile = ({
       });
     }, 150);
   };
+
+  useEffect(() => {
+    setActiveElement(0);
+  }, []);
 
   return (
       <Wrapper
