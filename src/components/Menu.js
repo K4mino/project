@@ -13,7 +13,6 @@ const Wrapper = styled.div`
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     inset:0;
-   
   }
 `;
 
@@ -22,7 +21,7 @@ const ProgressBar = styled.div`
   gap: 10px;
   z-index: 999;
   cursor: pointer;
- 
+  transition: all .5s ease;
 
   &.active {
     position: absolute;
@@ -34,9 +33,9 @@ const ProgressBar = styled.div`
 `;
 
 const Bar = styled.img`
-  height: 100px;  
+  height: 100px;
 
-  ${({ $isActive }) => ($isActive ? 'width: 200px;' : 'width: 100px;')}
+  ${({ $isActive }) => ($isActive ? 'width: 170px;' : 'width: 70px;')}
   ${({ $isActive }) => ($isActive
     ? 'filter:;'
     : 'filter: invert(15%) sepia(99%) saturate(0%) hue-rotate(210deg) brightness(104%) contrast(97%);')}
@@ -44,14 +43,14 @@ const Bar = styled.img`
   &.image.active {
     height: 56vmin;
     transition: width 0.5s linear;
-    ${({ $isActive }) => ($isActive ? 'width: 50vmin;' : 'width: 40vmin;')}
+    ${({ $isActive }) => ($isActive ? 'width: 45vmin;' : 'width: 35vmin;')}
   }
   object-fit: cover;
   object-position: 100% center;
 `;
 
 const Menu = ({
-  activeElement, refs, toggleNav, onClick, percentage, objFitPercentage,
+  activeElement, refs, isOpenNav, onClick, percentage, objFitPercentage, onSelect,
 }) => {
   const container = useRef(null);
 
@@ -67,13 +66,15 @@ const Menu = ({
   }, [objFitPercentage]);
 
   return (
-  <Wrapper ref={container} className={toggleNav ? 'active' : ''} >
-    <ProgressBar onClick={onClick} className={toggleNav ? 'active' : ''} $percentage={percentage}>
+  <Wrapper ref={container} className={isOpenNav ? 'active' : ''} >
+    <ProgressBar onClick={onClick} className={isOpenNav ? 'active' : ''} $percentage={percentage}>
       {refs.map((_, i) => (
         <Bar
+          id={i}
+          onClick={onSelect}
           src={_.src}
           $percentage={percentage}
-          className={`image ${toggleNav ? 'active' : ''}`}
+          className={`image ${isOpenNav ? 'active' : ''}`}
           key={_.title}
           $isActive={i === activeElement}
           $objFitPercentage={objFitPercentage}

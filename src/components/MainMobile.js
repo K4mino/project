@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 import Loader from './Loader';
+import MenuMobile from './MenuMobile';
 
 const Wrapper = styled.div`
     display: flex;
@@ -9,11 +10,34 @@ const Wrapper = styled.div`
     position: relative;
 `;
 
+const BurgerMenu = styled.div`
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    position:fixed;
+    top:16px;
+    right:16px;
+    z-index:9999;
+`;
+
+const Bar = styled.div`
+    width:34px;
+    height:4px;
+    background-color:#fff;
+
+    &:last-child {
+      width:24px;
+    }
+`;
+
 const MainMobile = ({
   lenis, refs, isScrollingTimer, runLenis, setActiveElement, activeElement, setStartY, startY,
 }) => {
   const [direction, setDirection] = useState('down');
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpenNav, setIsOpenNav] = useState(false);
+  const [percentage, setPercentage] = useState(30);
+  const [objFitPercentage, setObjFitPercentage] = useState(0);
   const handleTouchStart = (event) => {
     event.stopPropagation();
     setStartY(event.changedTouches[0].clientY);
@@ -34,6 +58,16 @@ const MainMobile = ({
     if (nextIndex < 0 || nextIndex >= refs.length) return;
 
     setIsLoading(true);
+
+    if (currentDirection === 'down') {
+      setPercentage((prev) => prev - 15);
+      setObjFitPercentage((prev) => prev + 5);
+    }
+
+    if (currentDirection === 'up') {
+      setPercentage((prev) => prev + 15);
+      setObjFitPercentage((prev) => prev - 5);
+    }
 
     isScrollingTimer = setTimeout(() => {
       setActiveElement(nextIndex);
@@ -60,6 +94,11 @@ const MainMobile = ({
         {isLoading && <Loader
         direction={direction}
         activeElement={activeElement}/>}
+        <BurgerMenu onClick={() => setIsOpenNav(!isOpenNav)}>
+          <Bar/>
+          <Bar/>
+          <Bar/>
+        </BurgerMenu>
         {
             refs.map((item, i) => (
                 <Block
@@ -70,6 +109,14 @@ const MainMobile = ({
                 key={item.id}
                 ref={item.ref}/>
             ))
+        }
+        {
+          isOpenNav && <MenuMobile
+          refs={refs}
+          percentage={percentage}
+          objFitPercentage={objFitPercentage}
+          isOpenNav={isOpenNav}
+          activeElement={activeElement}/>
         }
     </Wrapper>);
 };

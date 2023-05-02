@@ -42,6 +42,12 @@ export default function Home() {
       title: 'Pricing',
       src: '/images/4.jpg',
     },
+    {
+      id: 7,
+      ref: useRef(null),
+      title: 'Contact Us',
+      src: '/images/4.jpg',
+    },
   ];
   const [windowWidth, setWindowWidth] = useState(0);
   const [myLenis, setMyLenis] = useState({});

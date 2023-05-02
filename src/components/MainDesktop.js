@@ -15,7 +15,7 @@ const MainDesktop = ({
 }) => {
   const [direction, setDirection] = useState('down');
   const [isLoading, setIsLoading] = useState(false);
-  const [toggleNav, setToggleNav] = useState(false);
+  const [isOpenNav, setIsOpenNav] = useState(false);
   const [percentage, setPercentage] = useState(30);
   const [objFitPercentage, setObjFitPercentage] = useState(0);
 
@@ -35,13 +35,13 @@ const MainDesktop = ({
     setIsLoading(true);
 
     if (currentDirection === 'down') {
-      setPercentage((prev) => prev - 20);
-      setObjFitPercentage((prev) => prev + 10);
+      setPercentage((prev) => prev - 15);
+      setObjFitPercentage((prev) => prev + 5);
     }
 
     if (currentDirection === 'up') {
-      setPercentage((prev) => prev + 20);
-      setObjFitPercentage((prev) => prev - 10);
+      setPercentage((prev) => prev + 15);
+      setObjFitPercentage((prev) => prev - 5);
     }
 
     isScrollingTimer = setTimeout(() => {
@@ -57,11 +57,37 @@ const MainDesktop = ({
   }
 
   const handleToggleNav = () => {
-    setToggleNav(!toggleNav);
+    setIsOpenNav(!isOpenNav);
   };
-  console.log(objFitPercentage);
+
+  const handleSelect = (e) => {
+    if (!isOpenNav) return;
+
+    setIsOpenNav(false);
+    runLenis();
+    const targetIndex = +e.target.attributes.id.value;
+    setIsLoading(true);
+    setActiveElement(targetIndex);
+    setPercentage((prev) => {
+      if (targetIndex > activeElement) {
+        return prev - (8 * targetIndex);
+      }
+      if (targetIndex < activeElement) {
+        return prev + (8 * targetIndex);
+      }
+      return prev;
+    });
+    lenis.scrollTo(refs[targetIndex].ref.current, {
+      duration: 1.5,
+      onComplete: () => {
+        setIsLoading(false);
+      },
+      lock: true,
+    });
+  };
   // 7 секция desktop,web, mobile, about us,portfolio, pricing, contact,
   // menu camilemormal
+  // mobile menu
   return (
     <Wrapper onWheel={handleWheel}>
         {isLoading && <Loader
@@ -80,8 +106,9 @@ const MainDesktop = ({
         }
         <Menu onClick={handleToggleNav}
         refs={refs}
+        onSelect={handleSelect}
         activeElement={activeElement}
-        toggleNav={toggleNav}
+        isOpenNav={isOpenNav}
         percentage={percentage}
         objFitPercentage={objFitPercentage}
         setPercentage={setPercentage}/>
