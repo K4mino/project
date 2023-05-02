@@ -90,7 +90,7 @@ const MainMobile = ({
       <Wrapper
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        onTouchMove={(e) => e.stopPropagation()}>
+        onTouchMove={(e) => { e.stopPropagation(); e.preventDefault(); }}>
         {isLoading && <Loader
         direction={direction}
         activeElement={activeElement}/>}
