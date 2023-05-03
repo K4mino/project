@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
+import GenericLoader from './GenericLoader';
 import Loader from './Loader';
 import Menu from './Menu';
 
@@ -18,6 +19,14 @@ const MainDesktop = ({
   const [isOpenNav, setIsOpenNav] = useState(false);
   const [percentage, setPercentage] = useState(30);
   const [objFitPercentage, setObjFitPercentage] = useState(0);
+  const [isLoadingGeneric, setIsLoadingGeneric] = useState(false);
+
+  useEffect(() => {
+    setIsLoadingGeneric(true);
+    setTimeout(() => {
+      setIsLoadingGeneric(false);
+    }, 2000);
+  }, []);
 
   function handleWheel(event) {
     if (isLoading) return;
@@ -47,7 +56,7 @@ const MainDesktop = ({
     isScrollingTimer = setTimeout(() => {
       setActiveElement(nextIndex);
       lenis.scrollTo(refs[nextIndex].ref.current, {
-        duration: 2.5,
+        duration: 4,
         onComplete: () => {
           setIsLoading(false);
         },
@@ -57,6 +66,7 @@ const MainDesktop = ({
   }
 
   const handleToggleNav = () => {
+    if (isLoading) return;
     setIsOpenNav(!isOpenNav);
   };
 
@@ -66,6 +76,7 @@ const MainDesktop = ({
     setIsOpenNav(false);
     runLenis();
     const targetIndex = +e.target.attributes.id.value;
+    setIsLoadingGeneric(true);
     setActiveElement(targetIndex);
     setPercentage((prev) => {
       if (targetIndex > activeElement) {
@@ -77,8 +88,11 @@ const MainDesktop = ({
       return prev;
     });
     lenis.scrollTo(refs[targetIndex].ref.current, {
-      duration: 0,
+      duration: 2,
       lock: true,
+      onComplete: () => {
+        setIsLoadingGeneric(false);
+      },
     });
   };
   // 7 секция desktop,web, mobile, about us,portfolio, pricing, contact,
@@ -87,6 +101,7 @@ const MainDesktop = ({
   // general loader
   return (
     <Wrapper onWheel={handleWheel}>
+        {isLoadingGeneric && <GenericLoader/>}
         {isLoading && <Loader
         direction={direction}
         activeElement={activeElement}/>}
