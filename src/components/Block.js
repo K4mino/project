@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     align-items: center;
     font-size: 3rem;
     transition: opacity 3s linear;
-    opacity: 0;
+    opacity: 1;
     position:relative;
     z-index:1;
     background-size:cover;

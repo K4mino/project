@@ -16,7 +16,9 @@ const Wrapper = styled.div`
 export default function LoaderUp() {
   return (
         <Wrapper>
-            <h1>Up</h1>
+            <video autoPlay={true} muted>
+              <source src='/videos/loader2.mp4' type='video/mp4'/>
+            </video>
         </Wrapper>
   );
 }

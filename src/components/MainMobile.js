@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 import Loader from './Loader';
-import MenuMobile from './MenuMobile';
 
 const Wrapper = styled.div`
     display: flex;
@@ -36,8 +35,6 @@ const MainMobile = ({
   const [direction, setDirection] = useState('down');
   const [isLoading, setIsLoading] = useState(false);
   const [isOpenNav, setIsOpenNav] = useState(false);
-  const [percentage, setPercentage] = useState(30);
-  const [objFitPercentage, setObjFitPercentage] = useState(0);
   const handleTouchStart = (event) => {
     event.stopPropagation();
     setStartY(event.changedTouches[0].clientY);
@@ -58,16 +55,6 @@ const MainMobile = ({
     if (nextIndex < 0 || nextIndex >= refs.length) return;
 
     setIsLoading(true);
-
-    if (currentDirection === 'down') {
-      setPercentage((prev) => prev - 15);
-      setObjFitPercentage((prev) => prev + 5);
-    }
-
-    if (currentDirection === 'up') {
-      setPercentage((prev) => prev + 15);
-      setObjFitPercentage((prev) => prev - 5);
-    }
 
     isScrollingTimer = setTimeout(() => {
       setActiveElement(nextIndex);
@@ -90,7 +77,7 @@ const MainMobile = ({
       <Wrapper
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        onTouchMove={(e) => { e.stopPropagation(); e.preventDefault(); }}>
+        onTouchMove={(e) => e.stopPropagation()}>
         {isLoading && <Loader
         direction={direction}
         activeElement={activeElement}/>}
@@ -109,14 +96,6 @@ const MainMobile = ({
                 key={item.id}
                 ref={item.ref}/>
             ))
-        }
-        {
-          isOpenNav && <MenuMobile
-          refs={refs}
-          percentage={percentage}
-          objFitPercentage={objFitPercentage}
-          isOpenNav={isOpenNav}
-          activeElement={activeElement}/>
         }
     </Wrapper>);
 };

@@ -26,14 +26,15 @@ const ProgressBar = styled.div`
   &.active {
     position: absolute;
     ${({ $percentage }) => $percentage && `left:${$percentage}%;`}
-    top: 50%;
+    top: 50% !important;
     transform: translate(0%, -50%); 
     transform-origin: bottom right;
   }
 `;
 
 const Bar = styled.img`
-  height: 100px;
+  height: 90px;
+  transition:activeMenuWidth .5s linear;
 
   ${({ $isActive }) => ($isActive ? 'width: 170px;' : 'width: 70px;')}
   ${({ $isActive }) => ($isActive
@@ -47,8 +48,13 @@ const Bar = styled.img`
   }
   object-fit: cover;
   object-position: 100% center;
-`;
 
+  @keyframes activeMenuWidth{
+    from {width:70px;}
+    to {width:170px;}
+  }
+`;
+// width
 const Menu = ({
   activeElement, refs, isOpenNav, onClick, percentage, objFitPercentage, onSelect,
 }) => {

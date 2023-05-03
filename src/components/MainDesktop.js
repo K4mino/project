@@ -47,7 +47,7 @@ const MainDesktop = ({
     isScrollingTimer = setTimeout(() => {
       setActiveElement(nextIndex);
       lenis.scrollTo(refs[nextIndex].ref.current, {
-        duration: 1.5,
+        duration: 2.5,
         onComplete: () => {
           setIsLoading(false);
         },
@@ -66,7 +66,6 @@ const MainDesktop = ({
     setIsOpenNav(false);
     runLenis();
     const targetIndex = +e.target.attributes.id.value;
-    setIsLoading(true);
     setActiveElement(targetIndex);
     setPercentage((prev) => {
       if (targetIndex > activeElement) {
@@ -78,16 +77,14 @@ const MainDesktop = ({
       return prev;
     });
     lenis.scrollTo(refs[targetIndex].ref.current, {
-      duration: 1.5,
-      onComplete: () => {
-        setIsLoading(false);
-      },
+      duration: 0,
       lock: true,
     });
   };
   // 7 секция desktop,web, mobile, about us,portfolio, pricing, contact,
   // menu camilemormal
   // mobile menu
+  // general loader
   return (
     <Wrapper onWheel={handleWheel}>
         {isLoading && <Loader
