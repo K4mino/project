@@ -35,8 +35,8 @@ const ProgressBar = styled.div`
 
 const Bar = styled.img`
   height: 90px;
-
-  ${({ $isActive }) => ($isActive && 'transition: width 0.5s linear;')}
+  transition: width 0.5s linear;
+  
   ${({ $isActive }) => ($isActive ? 'width: 170px;' : 'width: 70px;')}
   ${({ $isActive }) => ($isActive
     ? 'filter:;'
