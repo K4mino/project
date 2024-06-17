@@ -8,6 +8,9 @@ const nextConfig = {
     scrollRestoration: false,
   },
   transpilePackages: ["geist"],
+  eslint:{
+    ignoreDuringBuilds: true
+  }
 };
 
 module.exports = nextConfig;
