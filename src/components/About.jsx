@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import skills from 'public/skills.json';
+import skills from "public/skills.json";
 import SkillBatch from "./Skillbatch";
 
 const Wrapper = styled.div`
@@ -46,16 +46,16 @@ const Place = styled.p`
 `;
 
 const Content = styled.div`
-    display: flex;
-    width: 100%;
-`
+  display: flex;
+  width: 100%;
+`;
 
 const About = () => {
   return (
     <Wrapper>
       <h2>About me</h2>
       <Content>
-        <Block >
+        <Block>
           <Title>Work experience</Title>
           <Block>
             <Subtitle>Backend Developer</Subtitle>
@@ -68,7 +68,7 @@ const About = () => {
             <Period>Aug 2022 - Nov 2022</Period>
           </Block>
         </Block>
-        <Block >
+        <Block>
           <Title>Education</Title>
           <Block>
             <Subtitle>Master's degree | Software Engineering</Subtitle>
@@ -81,11 +81,11 @@ const About = () => {
             <Period>Sep 2019 - Jun 2023</Period>
           </Block>
         </Block>
-        <Block >
+        <Block>
           <Title>Skills</Title>
-          <SkillBatch title={"Frontend"} skills={skills["Frontend"]}/>
-          <SkillBatch title={"Backend"} skills={skills["Backend"]}/>
-          <SkillBatch title={"Tools"} skills={skills["Tools"]}/>
+          <SkillBatch title={'Frontend'} skills={skills['Frontend']} />
+          <SkillBatch title={'Backend'} skills={skills['Backend']} />
+          <SkillBatch title={'Tools'} skills={skills['Tools']} />
         </Block>
       </Content>
     </Wrapper>

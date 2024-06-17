@@ -3,10 +3,10 @@ import Lenis from '@studio-freight/lenis';
 import MainDesktop from '../components/MainDesktop';
 import MainMobile from '../components/MainMobile';
 import CustomHead from '../components/CustomHead';
-import Intro from '@/components/Intro';
-import About from '@/components/About';
-import Projects from '@/components/Projects';
-import Contacts from '@/components/Contacts';
+import Intro from '../components/Intro';
+import About from '../components/About';
+import Projects from '../components/Projects';
+import Contacts from '../components/Contacts';
 export default function Home() {
   const refs = [
     {

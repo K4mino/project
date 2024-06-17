@@ -14,7 +14,7 @@ const StyledButton = styled.button`
 
     &:hover {
         background-color: #f0f0f0;
-    }
+    }f
 `;
 const Button = ({children}) => {
   return (

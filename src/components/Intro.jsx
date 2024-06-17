@@ -37,7 +37,7 @@ const Intro = () => {
            I am web developer with experience in building websites using React, Next, and Vue. I like building apps and solving problems using code.
         </Description>
         <Button >
-          <StyledLink href="/resume.pdf" download>My resume</StyledLink>
+          <StyledLink href='/resume.pdf' download>My resume</StyledLink>
         </Button>
     </Wrapper>
   )

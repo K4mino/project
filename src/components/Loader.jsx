@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     color:#fff;
 `;
 
-const Loader = ({ direction }) => (
+const Loader = () => (
     <Wrapper>
         <h1>Loading...</h1>
     </Wrapper>
