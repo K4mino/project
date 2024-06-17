@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   position: fixed;
-  bottom: 30px;
+  top: 20px;
   right: 20px;
   z-index: 999;
   overflow: hidden;
+
 
   &.active {
     width: 100vw;
@@ -21,30 +22,44 @@ const ProgressBar = styled.div`
   gap: 10px;
   z-index: 999;
   cursor: pointer;
-  transition: all .5s ease;
+  transition: width .3s ease;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
   &.active {
     position: absolute;
 
-    left:${({ $percentage }) => `${$percentage}%;`}
+    left: -14% !important;
     top: 50% !important;
     transform: translate(0%, -50%); 
     transform-origin: bottom right;
   }
 `;
 
-const Bar = styled.img`
+const Bar = styled.div`
   height: 90px;
-  transition: width 0.5s linear;
+  transition: width 0.3s linear;
+  background-color: #000;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  height: 40px;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
   
-  ${({ $isActive }) => ($isActive ? 'width: 170px;' : 'width: 70px;')}
+  ${({ $isActive }) => ($isActive ? 'width: 170px;' : 'width: 80px;')}
   ${({ $isActive }) => ($isActive
     ? 'filter:;'
     : 'filter: invert(15%) sepia(99%) saturate(0%) hue-rotate(210deg) brightness(104%) contrast(97%);')}
 
   &.image.active {
     height: 56vmin;
-    transition: width 0.5s linear;
+    transition: width 0.3s linear;
     ${({ $isActive }) => ($isActive ? 'width: 45vmin;' : 'width: 35vmin;')}
   }
   object-fit: cover;
@@ -59,7 +74,7 @@ const Menu = ({
   useEffect(() => {
     const track = container.current;
     const images = track.getElementsByClassName('image');
-    // eslint-disable-next-line no-restricted-syntax
+
     for (const image of images) {
       image.animate({
         objectPosition: `${50 + objFitPercentage}% center`,
@@ -80,7 +95,9 @@ const Menu = ({
           key={_.title}
           $isActive={i === activeElement}
           $objFitPercentage={objFitPercentage}
-        />
+        >
+          <span>{_.title}</span>
+        </Bar>
       ))}
     </ProgressBar>
   </Wrapper>

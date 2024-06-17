@@ -7,6 +7,7 @@ const nextConfig = {
   experimental: {
     scrollRestoration: false,
   },
+  transpilePackages: ["geist"],
 };
 
 module.exports = nextConfig;

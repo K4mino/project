@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Block from './Block';
 import GenericLoader from './GenericLoader';
@@ -12,21 +12,14 @@ const Wrapper = styled.div`
 `;
 
 const MainDesktop = ({
-  lenis, refs, isScrollingTimer, runLenis, setActiveElement, activeElement,
+  lenis, refs, isScrollingTimer, runLenis, setActiveElement, activeElement, isLoadingGeneric,
+  setIsLoadingGeneric,
 }) => {
   const [direction, setDirection] = useState('down');
   const [isLoading, setIsLoading] = useState(false);
   const [isOpenNav, setIsOpenNav] = useState(false);
-  const [percentage, setPercentage] = useState(30);
+  const [percentage, setPercentage] = useState(-15);
   const [objFitPercentage, setObjFitPercentage] = useState(0);
-  const [isLoadingGeneric, setIsLoadingGeneric] = useState(false);
-
-  useEffect(() => {
-    setIsLoadingGeneric(true);
-    setTimeout(() => {
-      setIsLoadingGeneric(false);
-    }, 2000);
-  }, []);
 
   function handleWheel(event) {
     if (isLoading) return;
@@ -40,9 +33,9 @@ const MainDesktop = ({
 
     const nextIndex = currentDirection === 'down' ? activeElement + 1 : activeElement - 1;
     if (nextIndex < 0 || nextIndex >= refs.length) return;
-
+    
     setIsLoading(true);
-
+    
     if (currentDirection === 'down') {
       setPercentage((prev) => prev - 15);
       setObjFitPercentage((prev) => prev + 5);
@@ -56,7 +49,7 @@ const MainDesktop = ({
     isScrollingTimer = setTimeout(() => {
       setActiveElement(nextIndex);
       lenis.scrollTo(refs[nextIndex].ref.current, {
-        duration: 4,
+        duration: 1,
         onComplete: () => {
           setIsLoading(false);
         },
@@ -75,30 +68,27 @@ const MainDesktop = ({
 
     setIsOpenNav(false);
     runLenis();
-    const targetIndex = +e.target.attributes.id.value;
-    setIsLoadingGeneric(true);
+    const targetIndex = +e.target.attributes.id?.value;
+    //setIsLoadingGeneric(true);
     setActiveElement(targetIndex);
-    setPercentage((prev) => {
+    /* setPercentage((prev) => {
       if (targetIndex > activeElement) {
-        return prev - (8 * targetIndex);
+        return prev - 15;
       }
       if (targetIndex < activeElement) {
-        return prev + (8 * targetIndex);
+        return prev + 1;
       }
       return prev;
-    });
+    }); */
     lenis.scrollTo(refs[targetIndex].ref.current, {
-      duration: 2,
+      duration: 1,
       lock: true,
       onComplete: () => {
         setIsLoadingGeneric(false);
       },
     });
   };
-  // 7 секция desktop,web, mobile, about us,portfolio, pricing, contact,
-  // menu camilemormal
-  // mobile menu
-  // general loader
+
   return (
     <Wrapper onWheel={handleWheel}>
         {isLoadingGeneric && <GenericLoader/>}
@@ -113,7 +103,9 @@ const MainDesktop = ({
                 title={item.title}
                 key={item.id}
                 ref={item.ref}
-                isActive={i === activeElement}/>
+                isActive={i === activeElement}>
+                    {item?.block}
+                </Block>
             ))
         }
         <Menu onClick={handleToggleNav}

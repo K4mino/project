@@ -3,57 +3,50 @@ import Lenis from '@studio-freight/lenis';
 import MainDesktop from '../components/MainDesktop';
 import MainMobile from '../components/MainMobile';
 import CustomHead from '../components/CustomHead';
-
+import Intro from '@/components/Intro';
+import About from '@/components/About';
+import Projects from '@/components/Projects';
+import Contacts from '@/components/Contacts';
 export default function Home() {
   const refs = [
     {
       id: 1,
       ref: useRef(null),
-      title: 'Desktop',
-      src: '/images/1.jpg',
+      title: 'Intro',
+      block:<Intro/>
     },
     {
       id: 2,
       ref: useRef(null),
-      title: 'Web',
-      src: '/images/2.jpg',
+      title: 'About',
+      block: <About/>
     },
     {
       id: 3,
       ref: useRef(null),
-      title: 'Mobile',
-      src: '/images/3.jpg',
+      title: 'Projects',
+      block: <Projects/>
     },
     {
       id: 4,
       ref: useRef(null),
-      title: 'About us',
-      src: '/images/4.jpg',
-    },
-    {
-      id: 5,
-      ref: useRef(null),
-      title: 'Portfolio',
-      src: '/images/4.jpg',
-    },
-    {
-      id: 6,
-      ref: useRef(null),
-      title: 'Pricing',
-      src: '/images/4.jpg',
-    },
-    {
-      id: 7,
-      ref: useRef(null),
-      title: 'Contact Us',
-      src: '/images/4.jpg',
-    },
+      title: 'Contacts',
+      block: <Contacts/>
+    }
   ];
   const [windowWidth, setWindowWidth] = useState(0);
   const [myLenis, setMyLenis] = useState({});
   const [startY, setStartY] = useState(null);
   const [activeElement, setActiveElement] = useState(0);
-  const isScrollingTimer = null;
+  const isScrollingTimer = useRef(null);
+  const [isLoadingGeneric, setIsLoadingGeneric] = useState(false);
+
+  useEffect(() => {
+    setIsLoadingGeneric(true);
+    setTimeout(() => {
+      setIsLoadingGeneric(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -81,20 +74,23 @@ export default function Home() {
   return (
     <>
       <CustomHead/>
-      <main className="main">
+      <main className={"main"}>
         {
           windowWidth > 960
             ? (
           <MainDesktop
+          isLoadingGeneric={isLoadingGeneric}
+          setIsLoadingGeneric={setIsLoadingGeneric}
           refs={refs}
           lenis={myLenis}
           runLenis={runLenis}
           setActiveElement={setActiveElement}
-          isScrollingTimer={isScrollingTimer}
+          isScrollingTimer={isScrollingTimer.current}
           activeElement={activeElement}
           />
             ) : (
           <MainMobile
+          isLoadingGeneric={isLoadingGeneric}
           refs={refs}
           lenis={myLenis}
           runLenis={runLenis}

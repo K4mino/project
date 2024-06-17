@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     z-index:1;
     background-size:cover;
 
-    background-image: ${({ $background }) => ($background ? `url(${$background})` : 'none')};
+    background-image: url(/images/bg.jpg);
     background-repeat: no-repeat;
 
     &.active {
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
     }
     &.active h1{
       color:#fff;
-      background-color:#333;
+      background-color:#000;
       opacity:0;
       transform: translateX(-150%);
       animation-name: slideLeft;
@@ -44,11 +44,11 @@ const Wrapper = styled.div`
 `;
 
 const Block = React.forwardRef(({
-  title, isActive, img,
+  title, isActive, img, children
 }, ref) => (
-    <Wrapper ref={ref} $background={img}
+    <Wrapper ref={ref}
         className={isActive ? 'active' : ''}>
-        <h1>{title}</h1>
+        {children}
     </Wrapper>
 ));
 

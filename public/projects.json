@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "title": "Student portal",
+        "description": "Website for student portal with authentication,chat,dashboard etc.",
+        "stack": ["React", "Firebase", "Ant Design","Styled Components"],
+        "image": "/images/studportal.png",
+        "url": "https://github.com/K4mino/student-portal"
+    },
+    {
+        "id": "2",
+        "title": "Sorting Visualizer",
+        "description": "Visualizer for sorting algorithms like Bubble Sort, Merge Sort, Quick Sort, Heap Sort.",
+        "stack": ["Vue","TypeScript"],
+        "image": "/images/sortingvisual.jpg",
+        "url": "https://sorting-visualizer-4eau.vercel.app/"
+    },
+    {
+        "id": "3",
+        "title": "Resume builder",
+        "description": "Build resume through form",
+        "stack": ["Next.js", "React-hook-form"],
+        "image": "/images/resumebuilder.jpg",
+        "url": "https://resume-builder-k4mino.vercel.app/"
+    },
+    {
+        "id": "4",
+        "title": "Blog app",
+        "description": "Website for posting blog",
+        "stack": ["React", "Express", "MongoDB","Material UI"],
+        "image": "/images/studportal.png",
+        "url": "https://github.com/K4mino/Blog-app-backend"
+    },
+    {
+        "id": "5",
+        "title": "Async race",
+        "description": "Race car game with promises",
+        "stack": ["Next.js", "React-hook-form"],
+        "image": "/images/studportal.png",
+        "url": "https://async-race-brown.vercel.app/"
+    }
+]

@@ -1,0 +1,23 @@
+{
+    "Frontend":[
+        "React",
+        "Next.js",
+        "Vue.js",
+        "Nuxt.js",
+        "HTML/CSS",
+        "Tailwind"
+    ],
+    "Backend":[
+        "Node.js",
+        "Nest.js",
+        "SQL",
+        "PL/SQL"
+    ],
+    "Tools":[
+        "Git",
+        "Docker",
+        "AWS",
+        "Webpack",
+        "Redux"
+    ]
+}

@@ -11,19 +11,12 @@ const Wrapper = styled.div`
     align-items:center;
     background-color:#333;
     color:#fff;
-
-    & .video{
-        width:100vw;
-        height:100vh;
-    }
 `;
 
-const LoaderDown = () => (
+const Loader = ({ direction }) => (
     <Wrapper>
-        <video autoPlay={true} muted className='video'>
-            <source src='/videos/loader.mp4' type='video/mp4'/>
-        </video>
+        <h1>Loading...</h1>
     </Wrapper>
 );
 
-export default LoaderDown;
+export default Loader;
