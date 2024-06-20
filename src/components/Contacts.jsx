@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import SectionTitle from './SectionTitle';
 
 const Wrapper = styled.div`
     display: flex;
@@ -9,13 +10,7 @@ const Wrapper = styled.div`
     height: 100vh;
     gap: 20px;
 `;
-const Title = styled.h1`
-    font-size: 40px;
-    margin: 0 auto;
-    width: 90%;
-    text-align: center;
-    color:#fff
-`;
+
 const Socials = styled.div`
     display: flex;
     gap: 20px;
@@ -24,6 +19,11 @@ const Socials = styled.div`
 const SocialIcon = styled.img`
     width: 80px;
     height: 80px;
+
+    @media (max-width: 768px) {
+        width: 60px;
+        height: 60px;
+    }
 `;
 
 const SocialLink = styled.a`
@@ -33,7 +33,7 @@ const SocialLink = styled.a`
 const Contacts = () => {
   return (
     <Wrapper>
-        <Title>Contacts</Title>
+        <SectionTitle>Contacts</SectionTitle>
         <Socials>
             <SocialLink target='_blank' href='https://github.com/K4mino'>
                 <SocialIcon src="/icons/github.png" alt="github" />

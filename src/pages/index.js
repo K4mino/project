@@ -91,6 +91,7 @@ export default function Home() {
             ) : (
           <MainMobile
           isLoadingGeneric={isLoadingGeneric}
+          setIsLoadingGeneric={setIsLoadingGeneric}
           refs={refs}
           lenis={myLenis}
           runLenis={runLenis}

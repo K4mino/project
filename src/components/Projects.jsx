@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import projects from "public/projects.json";
 import ProjectCard from "./ProjectCard";
+import SectionTitle from "./SectionTitle";
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,11 +21,18 @@ const Content = styled.div`
   flex-grow: 1;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 const Projects = () => {
   return (
     <Wrapper>
-      <h2>Projects</h2>
+      <SectionTitle>Projects</SectionTitle>
       <Content>
         {projects.map((project, index) => (
           <ProjectCard

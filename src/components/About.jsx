@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import skills from "public/skills.json";
 import SkillBatch from "./Skillbatch";
+import SectionTitle from "./SectionTitle";
 
 const Wrapper = styled.div`
   width: 95%;
@@ -11,13 +12,27 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    width: 100%;
+  }
 `;
 
 const Title = styled.h2`
-  font-size: 40px;
+  font-size: 36px;
   margin: 0;
   text-decoration: underline;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
 const Block = styled.div`
@@ -27,33 +42,68 @@ const Block = styled.div`
   align-items: flex-start;
   gap: 10px;
   flex-grow: 1;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+    gap: 5px;
+    height: 100%;
+  }
 `;
 
 const Subtitle = styled.h3`
   font-size: 24px;
   margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 const Period = styled.p`
   font-size: 22px;
   margin: 0;
   color: #777;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 const Place = styled.p`
   font-size: 24px;
   margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+}
+
+@media (max-width: 480px) {
+    font-size: 14px;
+}
 `;
 
 const Content = styled.div`
   display: flex;
   width: 100%;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    flex-direction: column;
+}
 `;
 
 const About = () => {
   return (
     <Wrapper>
-      <h2>About me</h2>
+      <SectionTitle>About me</SectionTitle>
       <Content>
         <Block>
           <Title>Work experience</Title>
