@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Title = styled.h2`
-    font-size: 40px;
+    font-size: 48px;
 
     @media (max-width: 768px) {
         font-size: 34px;

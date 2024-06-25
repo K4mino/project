@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useEffect} from "react";
 import styled from "styled-components";
 import projects from "public/projects.json";
 import ProjectCard from "./ProjectCard";
@@ -30,11 +30,27 @@ const Content = styled.div`
   }
 `;
 const Projects = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const displayedProjects = isMobile ? projects.slice(0, 3) : projects;
+
   return (
     <Wrapper>
       <SectionTitle>Projects</SectionTitle>
       <Content>
-        {projects.map((project, index) => (
+        {displayedProjects.map((project, index) => (
           <ProjectCard
             key={index}
             img={project.image}

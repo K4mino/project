@@ -93,6 +93,7 @@ const Place = styled.p`
 const Content = styled.div`
   display: flex;
   width: 100%;
+  justify-content: space-between;
 
   @media (max-width: 768px) {
     width: 90%;
