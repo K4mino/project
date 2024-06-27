@@ -12,14 +12,17 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 20px;
   height: 100vh;
+  margin: 0 auto;
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    gap: 10px;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  flex-grow: 1;
-  flex-wrap: wrap;
   justify-content: space-between;
 
   @media (max-width: 768px) {
@@ -44,7 +47,7 @@ const Projects = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const displayedProjects = isMobile ? projects.slice(0, 3) : projects;
+  const displayedProjects = isMobile ? projects.slice(0, 4) : projects;
 
   return (
     <Wrapper>

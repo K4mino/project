@@ -98,6 +98,7 @@ const Content = styled.div`
   @media (max-width: 768px) {
     width: 90%;
     flex-direction: column;
+    gap: 15px;
 }
 `;
 

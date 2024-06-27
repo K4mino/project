@@ -36,7 +36,6 @@ export default function Home() {
   ];
   const [windowWidth, setWindowWidth] = useState(0);
   const [myLenis, setMyLenis] = useState({});
-  const [startY, setStartY] = useState(null);
   const [activeElement, setActiveElement] = useState(0);
   const isScrollingTimer = useRef(null);
   const [isLoadingGeneric, setIsLoadingGeneric] = useState(false);
@@ -98,8 +97,6 @@ export default function Home() {
           setActiveElement={setActiveElement}
           isScrollingTimer={isScrollingTimer}
           activeElement={activeElement}
-          startY={startY}
-          setStartY={setStartY}
           />
             )
         }

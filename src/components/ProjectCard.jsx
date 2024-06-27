@@ -20,7 +20,7 @@ const Card = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: row;
-    width: 90%;
+    width: 95%;
     justify-content: center;
   }
 `;
@@ -29,7 +29,6 @@ const CardImage = styled.img`
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
-  
 
   @media (max-width: 768px) {
     width:50%;
@@ -55,6 +54,7 @@ const CardTitle = styled.h2`
 
   @media (max-width: 768px) {
     margin: 0px;
+    font-size: 14px;
   }
 `;
 
@@ -65,6 +65,14 @@ const CardDescription = styled.p`
   word-wrap: break-word; 
   overflow-wrap: break-word; 
   color: #000;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media (max-width: 540px) {
+    font-size: 10px;
+  }
 `;
 
 const CardLink = styled.a`

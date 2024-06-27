@@ -39,22 +39,32 @@ const MainMobile = ({
   runLenis,
   setActiveElement,
   activeElement,
-  setStartY,
-  startY,
   isLoadingGeneric,
   setIsLoadingGeneric,
 }) => {
   const [direction, setDirection] = useState("down");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpenNav, setIsOpenNav] = useState(false);
+  const [startY, setStartY] = useState(null);
+  const [isMoving, setIsMoving] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const MOVE_THRESHOLD = 40;
   const handleTouchStart = (event) => {
     event.stopPropagation();
     setStartY(event.changedTouches[0].clientY);
   };
 
-  const handleTouchEnd = (event) => {
-    if (isLoading && isOpenNav) return;
+  const handleTouchMove = (event) => {
+    event.stopPropagation();
+    const currentY = event.touches[0].clientY;
+    if (Math.abs(currentY - startY) > MOVE_THRESHOLD) {
+      setIsMoving(true); 
+    }
+  };
+  
 
+  const handleTouchEnd = (event) => {
+    if (!isMoving || isLoading || isScrolling) return;
     if (isScrollingTimer !== null) clearTimeout(isScrollingTimer);
 
     event.stopPropagation();
@@ -68,13 +78,14 @@ const MainMobile = ({
     if (nextIndex < 0 || nextIndex >= refs.length) return;
 
     setIsLoading(true);
-
+    setIsScrolling(true);
     isScrollingTimer = setTimeout(() => {
       setActiveElement(nextIndex);
       lenis.scrollTo(refs[nextIndex].ref.current, {
-        duration: 1.5,
+        duration: 1,
         onComplete: () => {
           setIsLoading(false);
+          setIsScrolling(false); 
         },
         lock: true,
       });
@@ -100,6 +111,18 @@ const MainMobile = ({
   };
 
   useEffect(() => {
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [startY, isMoving, isLoading, isScrolling, activeElement]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
     setActiveElement(0);
   }, []);
@@ -108,7 +131,7 @@ const MainMobile = ({
     <Wrapper
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      onTouchMove={(e) => e.stopPropagation()}
+      onTouchMove={handleTouchMove}
     >
       {isLoadingGeneric && <GenericLoader />}
       {isLoading && (
@@ -123,11 +146,11 @@ const MainMobile = ({
           onSelect={handleSelect}
         />
       )} */}
-      <BurgerMenu onClick={() => setIsOpenNav(!isOpenNav)}>
+{/*       <BurgerMenu onClick={() => setIsOpenNav(!isOpenNav)}>
         <Bar />
         <Bar />
         <Bar />
-      </BurgerMenu>
+      </BurgerMenu> */}
       {refs.map((item, i) => (
         <Block
           isActive={i === activeElement}

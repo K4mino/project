@@ -25,18 +25,18 @@
     },
     {
         "id": "4",
-        "title": "Blog app",
-        "description": "Website for posting blog",
-        "stack": ["React", "Express", "MongoDB","Material UI"],
-        "image": "/images/studportal.png",
-        "url": "https://github.com/K4mino/Blog-app-backend"
-    },
-    {
-        "id": "5",
         "title": "Async race",
         "description": "Race car game with promises",
         "stack": ["Next.js", "React-hook-form"],
         "image": "/images/studportal.png",
         "url": "https://async-race-brown.vercel.app/"
+    },
+    {
+        "id": "5",
+        "title": "Blog app",
+        "description": "Website for posting blog",
+        "stack": ["React", "Express", "MongoDB","Material UI"],
+        "image": "/images/studportal.png",
+        "url": "https://github.com/K4mino/Blog-app-backend"
     }
 ]
