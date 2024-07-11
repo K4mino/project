@@ -91,7 +91,7 @@ const MainDesktop = ({
 
   return (
     <Wrapper onWheel={handleWheel}>
-        {isLoadingGeneric && <GenericLoader/>}
+        
         {isLoading && <Loader
         direction={direction}
         activeElement={activeElement}/>}

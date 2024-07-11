@@ -57,14 +57,13 @@ const MainMobile = ({
   const handleTouchMove = (event) => {
     event.stopPropagation();
     const currentY = event.touches[0].clientY;
-    if (Math.abs(currentY - startY) > MOVE_THRESHOLD) {
-      setIsMoving(true); 
-    }
   };
   
 
   const handleTouchEnd = (event) => {
-    if (!isMoving || isLoading || isScrolling) return;
+    console.log(event.changedTouches[0].clientY, startY,direction);
+    if(Math.abs(event.changedTouches[0].clientY - startY) < MOVE_THRESHOLD)return
+    if (isLoading || isScrolling) return;
     if (isScrollingTimer !== null) clearTimeout(isScrollingTimer);
 
     event.stopPropagation();
@@ -133,7 +132,7 @@ const MainMobile = ({
       onTouchEnd={handleTouchEnd}
       onTouchMove={handleTouchMove}
     >
-      {isLoadingGeneric && <GenericLoader />}
+      
       {isLoading && (
         <Loader direction={direction} activeElement={activeElement} />
       )}

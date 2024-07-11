@@ -31,7 +31,8 @@ const CardImage = styled.img`
   object-fit: cover;
 
   @media (max-width: 768px) {
-    width:50%;
+    max-width:50%;
+    object-fit: contain;
   }
 `;
 

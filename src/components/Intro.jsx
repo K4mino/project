@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const Description = styled.p`
     font-size: 24px;
     text-align: center;
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
 
     @media (max-width: 768px) {
@@ -37,7 +37,8 @@ const Intro = () => {
     <Wrapper>
         <SectionTitle>Hi, my name is Yerzhan</SectionTitle>
         <Description>
-           I am web developer with experience in building websites using React, Next, and Vue. I like building apps and solving problems using code.
+           I am web developer with experience in building websites using React, Next, and Vue. <br/>
+           Looking forward to contributing to impactful web development projects and growing within a forward thinking team.
         </Description>
         <Button>
           <StyledLink href='/resume.pdf' download>My resume</StyledLink>
