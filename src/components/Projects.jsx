@@ -7,7 +7,7 @@ import SectionTitle from "./SectionTitle";
 const Wrapper = styled.div`
   display: flex;
   width: 95%;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   gap: 20px;
@@ -23,7 +23,7 @@ const Content = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   @media (max-width: 768px) {
     flex-direction: column;
