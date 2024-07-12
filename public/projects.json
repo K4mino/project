@@ -28,7 +28,7 @@
         "title": "Async race",
         "description": "Race car game with promises",
         "stack": ["Next.js", "React-hook-form"],
-        "image": "/images/studportal.png",
+        "image": "/images/asyncrace.jpg",
         "url": "https://async-race-brown.vercel.app/"
     },
     {
