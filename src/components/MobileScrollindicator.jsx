@@ -3,10 +3,23 @@ import styled,{keyframes} from "styled-components";
 
 const ArrowScroll = styled.div`
     position:fixed;
-    top:10px;
-    right:10px;
+    top:20px;
+    right:35px;
     height:40px;
-    z-index: 999;
+    z-index: 9999;
+`
+const arrow1 = keyframes`
+    100%{
+        opacity:0;
+        top:100%;
+    }
+`
+
+const arrow2 = keyframes`
+    100%{
+        opacity:0;
+        top:50%;
+    }
 `
 
 const Arrow = styled.div`
@@ -27,21 +40,7 @@ const Arrow = styled.div`
     &:nth-child(3){
         animation:${arrow2} 1.5s ease-in-out infinite;
     }
-`
-
-const arrow1 = keyframes`
-    100%{
-        opacity:0;
-        top:100%;
-    }
-`
-
-const arrow2 = keyframes`
-    100%{
-        opacity:0;
-        top:50%;
-    }
-`
+`;
 
 const MobileScrollindicator = () => {
   return (

@@ -4,11 +4,13 @@ import Block from './Block';
 import GenericLoader from './GenericLoader';
 import Loader from './Loader';
 import Menu from './Menu';
+import Scrollindicator from './Scrollindicator';
 
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
+    width: 100%;
 `;
 
 const MainDesktop = ({
@@ -91,7 +93,7 @@ const MainDesktop = ({
 
   return (
     <Wrapper onWheel={handleWheel}>
-        
+        <Scrollindicator/>
         {isLoading && <Loader
         direction={direction}
         activeElement={activeElement}/>}

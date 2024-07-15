@@ -5,6 +5,7 @@ import Block from "./Block";
 import Loader from "./Loader";
 import Menu from "./Menu";
 import MenuMobile from "./MenuMobile";
+import MobileScrollindicator from "./MobileScrollindicator";
 
 const Wrapper = styled.div`
   display: flex;
@@ -132,7 +133,7 @@ const MainMobile = ({
       onTouchEnd={handleTouchEnd}
       onTouchMove={handleTouchMove}
     >
-      
+      <MobileScrollindicator/>
       {isLoading && (
         <Loader direction={direction} activeElement={activeElement} />
       )}
