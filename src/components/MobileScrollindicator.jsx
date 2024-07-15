@@ -6,6 +6,7 @@ const ArrowScroll = styled.div`
     top:10px;
     right:10px;
     height:40px;
+    z-index: 999;
 `
 
 const Arrow = styled.div`
