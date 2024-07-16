@@ -1,5 +1,7 @@
 {
     "Frontend":[
+        "JavaScript",
+        "TypeScript",
         "React",
         "Next.js",
         "Vue.js",
