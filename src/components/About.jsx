@@ -41,7 +41,6 @@ const Block = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  flex-grow: 1;
 
   @media (max-width: 768px) {
     margin-bottom: 10px;
@@ -93,7 +92,7 @@ const Place = styled.p`
 const Content = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content:center; 
 
   @media (max-width: 768px) {
     width: 90%;
